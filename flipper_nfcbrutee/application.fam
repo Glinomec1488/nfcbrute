@@ -1,0 +1,15 @@
+App(
+    appid="nfc_sector_brute",
+    name="Nfc sector brute",
+    apptype=FlipperAppType.EXTERNAL,
+    entry_point="nfcgoesbrr_entry",
+    requires=["gui"],
+    stack_size=2 * 1024,
+    fap_version=(1, 4),
+    fap_icon="icon.png",
+    fap_icon_assets="images",
+    fap_icon_assets_symbol="nfc_sector_brute",
+    fap_category="NFC",
+    fap_author="M3latonin",
+    fap_description="Generates random values over dedicated mifare card sectors",
+)
