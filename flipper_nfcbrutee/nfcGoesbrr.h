@@ -39,7 +39,7 @@
 
 #define TAG "MFbrute"
 
-#define NFC_APP_FOLDER  ANY_PATH("/nfc")
+#define NFC_APP_FOLDER ANY_PATH("/nfc")
 #define NFC_APP_EXTENSION ".nfc"
 #define NFC_APP_SHADOW_EXTENSION ".shd"
 
@@ -54,9 +54,8 @@ enum CustomEvent {
 typedef enum {
     nfcGoesbrrSubmenuIndexFileSelect,
     nfcGoesbrrSubmenuIndexSavedConfs,
-    nfcGoesbrrSubmenuIndexAbout
+    nfcGoesbrrSubmenuIndexAbout,
 } nfcGoesbrrSubmenuIndex;
-typedef enum { nfcGoesbrrViewSubmenu, nfcGoesbrrViewAbout } nfcGoesbrrSubmenu;
 
 typedef struct {
     uint8_t bits : 3;
@@ -68,7 +67,7 @@ struct nfcGoesbrr { //structure declarations
     ViewPort* view_port; //declaring a ViewPort
     ViewDispatcher* view_dispatcher;
     Submenu* submenu;
-    Widget* widget_about;
+    Widget* widget;
     Popup* popup;
     SceneManager* scene_manager;
 
@@ -93,6 +92,7 @@ typedef enum {
     ViewPopup,
     ViewDialogEx,
     ViewByteInput,
+    ViewAbout,
 } AppView;
 
 typedef enum {

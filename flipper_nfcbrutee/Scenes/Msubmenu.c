@@ -13,7 +13,7 @@ void nfcgoesbrr_submenu_callback(void* context, uint32_t index) {
         furi_hal_vibro_on(false);
         break;
     case nfcGoesbrrSubmenuIndexAbout:
-        view_dispatcher_switch_to_view(app->view_dispatcher, nfcGoesbrrViewAbout);
+        view_dispatcher_switch_to_view(app->view_dispatcher, ViewAbout);
         break;
     default:
         break;
@@ -23,14 +23,10 @@ void nfcgoesbrr_submenu_callback(void* context, uint32_t index) {
 void nfcgoesbrr_scene_main_menu_on_enter(void* context) {
     nfcGoesbrr* app = context;
 
-    app->widget_about = widget_alloc();
-    widget_add_text_scroll_element(app->widget_about, 0, 0, 128, 64, NFCGOESBRR_ABOUT_TEXT);
-    view_dispatcher_add_view(
-        app->view_dispatcher, nfcGoesbrrViewAbout, widget_get_view(app->widget_about));
-    view_dispatcher_add_view(
-        app->view_dispatcher, nfcGoesbrrViewSubmenu, submenu_get_view(app->submenu));
+    widget_add_text_scroll_element(app->widget, 0, 0, 128, 64, NFCGOESBRR_ABOUT_TEXT);
 
-    view_dispatcher_switch_to_view(app->view_dispatcher, nfcGoesbrrViewSubmenu);
+    view_dispatcher_switch_to_view(app->view_dispatcher, ViewSubmenu);
+
     submenu_add_item(
         app->submenu,
         "Select a file",
@@ -54,5 +50,7 @@ bool nfcgoesbrr_scene_main_menu_on_event(void* context, SceneManagerEvent event)
 }
 
 void nfcgoesbrr_scene_main_menu_on_exit(void* context) {
-    UNUSED(context);
+    nfcGoesbrr* app = context;
+
+    submenu_reset(app->submenu);
 }

@@ -17,7 +17,8 @@ void nfcgoesbrr_scene_file_select_on_enter(void* context) {
         scene_manager_next_scene(app->scene_manager, SceneInvalidFile);
     } else {
         // Exiting from file list stops the application
-        view_dispatcher_stop(app->view_dispatcher);
+        //view_dispatcher_stop(app->view_dispatcher);
+        submenu_reset(app->submenu);
     }
 }
 
@@ -28,7 +29,8 @@ bool nfcgoesbrr_scene_file_select_on_event(void* context, SceneManagerEvent even
 }
 
 void nfcgoesbrr_scene_file_select_on_exit(void* context) {
-    UNUSED(context);
+    nfcGoesbrr* app = context;
+    submenu_reset(app->submenu);
 }
 
 static void mfc_editor_get_shadow_file_path(FuriString* file_path, FuriString* shadow_file_path) {

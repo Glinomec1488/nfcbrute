@@ -47,7 +47,6 @@ nfcGoesbrr* nfcgoesbrr_app_alloc() { //allocate memory
     nfcGoesbrr* app = malloc(sizeof(nfcGoesbrr)); //allocate memory
 
     app->view_dispatcher = view_dispatcher_alloc();
-
     app->scene_manager = scene_manager_alloc(&nfcgoesbrr_scene_handlers, app);
     view_dispatcher_enable_queue(app->view_dispatcher);
 
@@ -72,6 +71,9 @@ nfcGoesbrr* nfcgoesbrr_app_alloc() { //allocate memory
     app->data_view_header = furi_string_alloc();
     app->data_view_text = furi_string_alloc();
 
+    app->widget = widget_alloc();
+    view_dispatcher_add_view(app->view_dispatcher, ViewAbout, widget_get_view(app->widget));
+
     app->submenu = submenu_alloc();
     view_dispatcher_add_view(app->view_dispatcher, ViewSubmenu, submenu_get_view(app->submenu));
 
@@ -91,7 +93,7 @@ nfcGoesbrr* nfcgoesbrr_app_alloc() { //allocate memory
 
 void nfcgoesbrr_app_free(nfcGoesbrr* app) { //free allocated memory
 
-    view_dispatcher_remove_view(app->view_dispatcher, nfcGoesbrrViewSubmenu);
+    view_dispatcher_remove_view(app->view_dispatcher, ViewSubmenu);
     submenu_free(app->submenu);
 
     view_dispatcher_remove_view(app->view_dispatcher, ViewPopup);
